@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import '@radix-ui/themes/styles.css'
 import { Theme } from "@radix-ui/themes";
+import Navbar from "./navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,10 +41,14 @@ export default function RootLayout({
           grayColor="gray"
           className={inter.variable}
         >
+          <Navbar />
+          <main className='p-5'>
+
           {children}
           {/* <ThemePanel /> */}
-        </Theme>
-      </body>
-    </html>
+        </main>
+      </Theme>
+    </body>
+    </html >
   );
 }
