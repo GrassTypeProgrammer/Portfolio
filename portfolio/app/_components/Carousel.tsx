@@ -1,52 +1,75 @@
 "use client"
-import React, { useCallback } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
 import { Button, Flex } from '@radix-ui/themes'
+import classNames from 'classnames'
+import useEmblaCarousel from 'embla-carousel-react'
+import React, { useCallback, useState } from 'react'
 
-interface Props{
+interface Props {
     slides: React.ReactNode[],
 }
 
 const Carousel = (props: Props) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
-
-    // useEffect(() => {
-    //     if (emblaApi) {
-    //         console.log(emblaApi.slideNodes()) // Access API
-    //     }
-    // }, [emblaApi])
+    const [toggleSlideIndex, setToggledSlideIndex] = useState(0);
 
     const scrollPrev = useCallback(() => {
         if (emblaApi) {
             emblaApi.scrollPrev();
+            setToggledSlideIndex(emblaApi.selectedScrollSnap())
         }
-    }, [emblaApi])
+    }, [emblaApi,])
 
     const scrollNext = useCallback(() => {
         if (emblaApi) {
             emblaApi.scrollNext()
+            setToggledSlideIndex(emblaApi.selectedScrollSnap())
         }
     }, [emblaApi])
 
+    function onClickDotButton(index: number) {
+        emblaApi?.scrollTo(index);
+        setToggledSlideIndex(emblaApi?.selectedScrollSnap() ?? 0);
+    }
+
     return (
-        <div className="overflow-hidden max-w-3xl" ref={emblaRef}>
-            <Flex>
+        <div className="overflow-hidden max-w-3xl mt-5" ref={emblaRef}>
+            <Flex mb='3'>
                 {props.slides.map((element, index) => (
-                    <div className="w-50 min-w-0 flex-shrink-0 basis-full pl-4" key={index}>
+                    <div className="min-w-0 flex-shrink-0 basis-full h-auto" key={index}>
                         {element}
                     </div>
                 ))
                 }
             </Flex>
 
-            <Button className="embla__prev" onClick={scrollPrev}>
-                Prev
-            </Button>
-            <Button className="embla__next" onClick={scrollNext}>
-                Next
-            </Button>
+            <Flex direction={'row'} height={'50'} justify={'center'} mb='5'>
+                <Button onClick={scrollPrev}>
+                    Prev
+                </Button>
+
+                <Flex align={'center'}>
+                    {props.slides.map((slide, index) => {
+                        return <div
+                            className={classNames(
+                                'w-3 h-3 bg-gray-500 mr-1 cursor-pointer rounded-sm',
+                                { 'ml-2': index == 0 },
+                                { 'mr-2': index == props.slides.length - 1 },
+                                { 'w-5 h-5': index == toggleSlideIndex }
+                            )}
+                            key={index}
+                            onClick={() => { onClickDotButton(index) }}
+                        />
+                    })}
+                </Flex>
+
+                <Button onClick={scrollNext}>
+                    Next
+                </Button>
+            </Flex>
         </div>
     )
 }
 
 export default Carousel
+
+
