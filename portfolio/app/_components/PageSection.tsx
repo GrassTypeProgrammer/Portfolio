@@ -5,11 +5,12 @@ import Header, { HeaderType } from './Header'
 interface Props {
     header?: string,
     children?: React.ReactNode,
+    id?: string,
 }
 
 const PageSection = (props: Props) => {
     return (
-        <Section>
+        <Section pt='0' id={props.id}>
             <Flex align={'center'} direction={'column'}>
                 {props.header &&
                     <Header headerType={HeaderType.SectionHeader} label={props.header} />
