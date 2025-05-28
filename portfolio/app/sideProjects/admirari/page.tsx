@@ -7,12 +7,7 @@ import { Container, Flex } from '@radix-ui/themes'
 import Image from 'next/image'
 import React from 'react'
 
-// TODO: .
-/** TODO
- * - Use nextjs image instead of img?
- * - Snap slideshow?
- * - Move on to the next page. More could probably be done here, but I think it's best to move on for now.
- */
+
 
 const imgHeight = 422;
 const imgWidth = 764;
