@@ -3,9 +3,11 @@ import { Button, Flex } from '@radix-ui/themes'
 import classNames from 'classnames'
 import useEmblaCarousel from 'embla-carousel-react'
 import React, { useCallback, useState } from 'react'
+import Paragraph from './Paragraph'
 
 interface Props {
     slides: React.ReactNode[],
+    captions?: string[],
 }
 
 const Carousel = (props: Props) => {
@@ -31,6 +33,8 @@ const Carousel = (props: Props) => {
         setToggledSlideIndex(emblaApi?.selectedScrollSnap() ?? 0);
     }
 
+    const showCaption: boolean = (props.captions != undefined && props.captions.length > toggleSlideIndex && props.captions[toggleSlideIndex] !== undefined);
+
     return (
         <div className="overflow-hidden max-w-3xl mt-5" ref={emblaRef}>
             <Flex mb='3'>
@@ -41,6 +45,14 @@ const Carousel = (props: Props) => {
                 ))
                 }
             </Flex>
+
+            {showCaption &&
+                <Paragraph 
+                modifiers='mb-3' 
+                text={props.captions![toggleSlideIndex]} 
+                isCaption='true' 
+                />
+            }
 
             <Flex direction={'row'} height={'50'} justify={'center'} mb='5'>
                 <Button onClick={scrollPrev}>
