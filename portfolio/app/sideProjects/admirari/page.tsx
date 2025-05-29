@@ -23,8 +23,7 @@ const Admirari = () => {
         <Image
           className='mb-16'
           src='/admirari/bear-shockwave.gif'
-          // TODO: fill in this alt as well
-          alt='test'
+          alt='A gif of the bear boss slamming the ground to create a shockwave.'
           height={imgHeight}
           width={imgWidth}
         />
