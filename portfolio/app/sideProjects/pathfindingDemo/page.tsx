@@ -14,9 +14,11 @@ const PathFinding = () => {
     <Container maxWidth={'800px'}>
 
       <Flex align={'center'} justify={'center'} direction={'column'}>
-        <Header headerType={HeaderType.PageHeader} label='Admirari In Creature Planet' />
+        <Header headerType={HeaderType.PageHeader} label='Pathfinding Demo' />
 
-        <Carousel slides={
+        <Carousel
+          captions={pathfindingCaptions}
+          slides={
             pathfindingSlides.map((data, index) => {
               // eslint-disable-next-line @next/next/no-img-element
               return <img
@@ -93,6 +95,8 @@ interface ImageData {
   height: number,
 }
 
+const pathfindingCaptions: string[] = ['Dijkstra', 'Astar', 'breadth first search', 'depth first search', 'Modifying the grid'];
+
 const pathfindingSlides: ImageData[] = [
   {
     src: '/pathfindingDemo/dijkstra.gif',
@@ -124,6 +128,6 @@ const pathfindingSlides: ImageData[] = [
     height: imgHeight,
     width: imgWidth,
   },
-  
+
 ]
 //#endregion
