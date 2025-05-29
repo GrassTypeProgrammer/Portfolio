@@ -35,7 +35,7 @@ const Carousel = (props: Props) => {
         <div className="overflow-hidden max-w-3xl mt-5" ref={emblaRef}>
             <Flex mb='3'>
                 {props.slides.map((element, index) => (
-                    <div className="min-w-0 flex-shrink-0 basis-full h-auto" key={index}>
+                    <div className="min-w-0 flex-shrink-0 basis-full h-auto justify-items-center" key={index}>
                         {element}
                     </div>
                 ))
