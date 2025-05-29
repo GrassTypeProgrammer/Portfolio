@@ -17,6 +17,7 @@ const PathFinding = () => {
         <Header headerType={HeaderType.PageHeader} label='Pathfinding Demo' />
 
         <Carousel
+          modifiers='mb-16'
           captions={pathfindingCaptions}
           slides={
             pathfindingSlides.map((data, index) => {
