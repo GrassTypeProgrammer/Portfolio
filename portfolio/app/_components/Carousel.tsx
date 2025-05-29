@@ -8,6 +8,7 @@ import Paragraph from './Paragraph'
 interface Props {
     slides: React.ReactNode[],
     captions?: string[],
+    modifiers?: string,
 }
 
 const Carousel = (props: Props) => {
@@ -36,7 +37,7 @@ const Carousel = (props: Props) => {
     const showCaption: boolean = (props.captions != undefined && props.captions.length > toggleSlideIndex && props.captions[toggleSlideIndex] !== undefined);
 
     return (
-        <div className="overflow-hidden max-w-3xl mt-5" ref={emblaRef}>
+        <div className={classNames("overflow-hidden max-w-3xl mt-5", props.modifiers)} ref={emblaRef}>
             <Flex mb='3'>
                 {props.slides.map((element, index) => (
                     <div className="min-w-0 flex-shrink-0 basis-full h-auto justify-items-center" key={index}>
